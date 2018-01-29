@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exemplos AngularJS</title>
+</head>
+<body ng-app="exemplos">
+    <style>
+        .quadrado{
+            width: 50px;
+            height: 50px;
+            background-color: red;
+        }
+
+        .quadrado.azul{
+            background-color: blue;
+        }
+    </style>
+
+    <section ng-controller="ExemplosController">
+        <h2>Impressão de Variáveis</h2>
+        {{ nome }}
+
+        <h2>NgRepeat</h2>
+        <ul>
+            <li ng-repeat="convidado in convidados">{{ convidado }}</li>
+        </ul>
+
+        <h2>NgClick</h2>
+        <p>{{ cor }}</p>
+        <button ng-click="trocarCor()">Trocar Cor</button>
+
+        <h2>NgClass</h2>
+        <div class="quadrado" ng-class="{'azul': cor == 'Azul'}"></div>
+
+        <h2>NgShow</h2>
+        <p ng-show="cor == 'Azul'">Este meu parágrafo só vai aparecer quando o quadrado for azul</p>
+
+        <h2>NgModel</h2>
+        <input type="text" ng-model="sobrenome">
+        <p>{{ nomeSalvo }}</p>
+        <button ng-click="salvar()">Salvar</button>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script>
+        const app = angular.module('exemplos', []);
+        
+        app.controller('ExemplosController', ($scope) => {
+            $scope.nome = 'Adrian';
+            $scope.convidados = ['Caique', 'Dani', 'Bárbara', 'John', 'Larissa'];
+            $scope.cor = 'Vermelho';
+
+            $scope.trocarCor = () => {
+                if($scope.cor == 'Vermelho'){
+                    $scope.cor = 'Azul';
+                }
+                else{
+                    $scope.cor = 'Vermelho';
+                }
+            }
+
+            $scope.salvar = () => {
+                $scope.nomeSalvo = $scope.sobrenome;
+            }
+        });
+    </script>
+</body>
+</html>
